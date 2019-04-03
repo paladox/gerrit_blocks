@@ -60,14 +60,14 @@ public class WikimediaBlocksFinder {
               groupsCollection.parse(TopLevelResource.INSTANCE, IdString.fromDecoded(groupName));
           Optional<GroupDescription.Internal> maybeInternalGroup = group.asInternalGroup();
           if (!maybeInternalGroup.isPresent()) {
-            log.error("Ignoring limits for non-internal group ''{}'' in blocks.config", groupName);
+            log.debug("Ignoring limits for non-internal group ''{}'' in blocks.config", groupName);
           } else if (memberShip.contains(maybeInternalGroup.get().getGroupUUID())) {
             return Optional.ofNullable(blocks.get().get(groupName));
           }
         } catch (ResourceNotFoundException e) {
-          log.error("Ignoring limits for unknown group ''{}'' in blocks.config", groupName);
+          log.debug("Ignoring limits for unknown group ''{}'' in blocks.config", groupName);
         } catch (AuthException e) {
-          log.error("Ignoring limits for non-visible group ''{}'' in blocks.config", groupName);
+          log.debug("Ignoring limits for non-visible group ''{}'' in blocks.config", groupName);
         }
       }
     }
